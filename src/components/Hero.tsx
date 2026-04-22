@@ -1,20 +1,25 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
     }
   }, [isMuted]);
+
+  const handleVideoLoad = () => {
+    setIsVideoLoaded(true);
+  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -36,17 +41,23 @@ export default function Hero() {
           style={{ scale }}
           className="relative w-full h-full overflow-hidden"
         >
-          {/* Video Background */}
-          <video
+          {/* Video Background with Smooth Loading */}
+          <motion.video
             ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover grayscale opacity-60"
+            preload="auto"
+            poster="/poster-hero.jpg"
+            onLoadedData={handleVideoLoad}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isVideoLoaded ? 0.6 : 0 }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0 w-full h-full object-cover grayscale"
           >
             <source src="/hindia-vidio.mp4" type="video/mp4" />
-          </video>
+          </motion.video>
 
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
