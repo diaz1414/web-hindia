@@ -14,6 +14,10 @@ export default function Hero() {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
+      // Force play if already cached
+      if (videoRef.current.readyState >= 2) {
+        setIsVideoLoaded(true);
+      }
     }
   }, [isMuted]);
 
@@ -50,9 +54,9 @@ export default function Hero() {
             playsInline
             preload="auto"
             poster="/poster-hero.jpg"
-            onLoadedData={handleVideoLoad}
+            onCanPlay={handleVideoLoad}
             initial={{ opacity: 0 }}
-            animate={{ opacity: isVideoLoaded ? 0.6 : 0 }}
+            animate={{ opacity: 0.6 }} // Set langsung ke 0.6 untuk testing
             transition={{ duration: 1.5 }}
             className="absolute inset-0 w-full h-full object-cover grayscale"
           >
