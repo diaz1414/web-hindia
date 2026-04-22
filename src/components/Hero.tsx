@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
 export default function Hero() {
@@ -85,18 +85,53 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Controls */}
-          <div className="absolute bottom-12 right-12 z-20 flex flex-col items-end gap-4">
-            <button
+          {/* Vintage Analog Volume Control */}
+          <div className="absolute bottom-12 right-12 z-20">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setIsMuted(!isMuted)}
-              className="p-4 bg-foreground/10 backdrop-blur-md border border-foreground/20 rounded-full hover:bg-foreground/20 transition-all group"
+              className="relative flex items-center justify-center group"
             >
-              {isMuted ? <VolumeX size={20} className="group-hover:scale-110 transition-transform" /> : <Volume2 size={20} className="group-hover:scale-110 transition-transform" />}
-            </button>
-            <div className="text-right">
-              <p className="text-technical uppercase">Kontrol Volume</p>
-              <p className="text-[10px] opacity-40 uppercase">Sistem Interaktif v1.0</p>
-            </div>
+              {/* Outer Crosshair / Guide */}
+              <div className="absolute inset-0 border border-foreground/5 rounded-full scale-[1.6] group-hover:border-maroon/20 transition-colors duration-500" />
+              <div className="absolute h-[1px] w-4 bg-foreground/10 -left-6" />
+              <div className="absolute h-[1px] w-4 bg-foreground/10 -right-6" />
+              
+              {/* Button Body */}
+              <div className="relative w-14 h-14 bg-background/40 backdrop-blur-xl border border-foreground/20 rounded-full flex items-center justify-center shadow-2xl group-hover:border-maroon/40 transition-all duration-500 overflow-hidden">
+                <div className="grain-overlay opacity-20" />
+                
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={isMuted ? "muted" : "unmuted"}
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.4, ease: "circOut" }}
+                    className="relative z-10"
+                  >
+                    {isMuted ? (
+                      <VolumeX size={18} className="text-foreground/40" />
+                    ) : (
+                      <Volume2 size={18} className="text-maroon" />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Status LED Indicator */}
+              <div className="absolute -top-1 -right-1 flex flex-col items-center gap-1">
+                 <div className={`w-2 h-2 rounded-full border border-background transition-all duration-700 ${
+                   isMuted ? 'bg-foreground/10 shadow-none' : 'bg-maroon shadow-[0_0_10px_rgba(128,0,0,0.8)]'
+                 }`} />
+              </div>
+              
+              {/* Micro Labels */}
+              <span className="absolute -bottom-6 text-[7px] tracking-[0.3em] uppercase opacity-30 font-mono">
+                {isMuted ? 'Mute' : 'Live'}
+              </span>
+            </motion.button>
           </div>
 
           {/* Technical Borders */}
