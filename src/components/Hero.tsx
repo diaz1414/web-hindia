@@ -56,7 +56,7 @@ export default function Hero() {
             poster="/poster-hero.jpg"
             onCanPlay={handleVideoLoad}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }} // Set langsung ke 0.6 untuk testing
+            animate={{ opacity: isVideoLoaded ? 0.6 : 0 }}
             transition={{ duration: 1.5 }}
             className="absolute inset-0 w-full h-full object-cover grayscale"
           >
