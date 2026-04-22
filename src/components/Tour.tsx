@@ -136,7 +136,7 @@ export default function Tour() {
                       </div>
                       <div className="text-right">
                         <p className="text-xs opacity-40 uppercase mb-1">Tanggal</p>
-                        <p className="font-mono text-maroon">{selectedGig.date}.2024</p>
+                        <p className="font-mono text-maroon">{selectedGig.date}.2026</p>
                       </div>
                     </div>
 

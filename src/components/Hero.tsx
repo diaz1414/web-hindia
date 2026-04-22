@@ -80,7 +80,7 @@ export default function Hero() {
             </h1>
             <div className="flex items-center justify-center gap-6">
               <div className="h-[1px] w-12 bg-maroon/50" />
-              <p className="text-technical tracking-widest uppercase">Est. 2024 / Jakarta</p>
+              <p className="text-technical tracking-widest uppercase">Est. 2026 / Jakarta</p>
               <div className="h-[1px] w-12 bg-maroon/50" />
             </div>
           </motion.div>
@@ -97,11 +97,11 @@ export default function Hero() {
               <div className="absolute inset-0 border border-foreground/5 rounded-full scale-[1.6] group-hover:border-maroon/20 transition-colors duration-500" />
               <div className="absolute h-[1px] w-4 bg-foreground/10 -left-6" />
               <div className="absolute h-[1px] w-4 bg-foreground/10 -right-6" />
-              
+
               {/* Button Body */}
               <div className="relative w-14 h-14 bg-background/40 backdrop-blur-xl border border-foreground/20 rounded-full flex items-center justify-center shadow-2xl group-hover:border-maroon/40 transition-all duration-500 overflow-hidden">
                 <div className="grain-overlay opacity-20" />
-                
+
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={isMuted ? "muted" : "unmuted"}
@@ -122,11 +122,10 @@ export default function Hero() {
 
               {/* Status LED Indicator */}
               <div className="absolute -top-1 -right-1 flex flex-col items-center gap-1">
-                 <div className={`w-2 h-2 rounded-full border border-background transition-all duration-700 ${
-                   isMuted ? 'bg-foreground/10 shadow-none' : 'bg-maroon shadow-[0_0_10px_rgba(128,0,0,0.8)]'
-                 }`} />
+                <div className={`w-2 h-2 rounded-full border border-background transition-all duration-700 ${isMuted ? 'bg-foreground/10 shadow-none' : 'bg-maroon shadow-[0_0_10px_rgba(128,0,0,0.8)]'
+                  }`} />
               </div>
-              
+
               {/* Micro Labels */}
               <span className="absolute -bottom-6 text-[7px] tracking-[0.3em] uppercase opacity-30 font-mono">
                 {isMuted ? 'Mute' : 'Live'}

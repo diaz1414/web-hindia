@@ -16,9 +16,9 @@ export default function Footer() {
             </p>
             <div className="flex gap-6">
               {[SiSpotify, SiInstagram, SiYoutube, SiX].map((Icon, i) => (
-                <a 
-                  key={i} 
-                  href="#" 
+                <a
+                  key={i}
+                  href="#"
                   className="p-3 border border-foreground/10 rounded-full hover:bg-maroon hover:border-maroon transition-all"
                 >
                   <Icon size={18} />
@@ -49,7 +49,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-foreground/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] font-mono opacity-30 uppercase tracking-[0.2em]">
-            © 2024 HINDIA / SOLUSI TEKNIS LTD.
+            © 2026 HINDIA / SOLUSI TEKNIS LTD.
           </p>
           <div className="flex items-center gap-4 text-[10px] font-mono opacity-30">
             <span>VER: 4.1.0-STABIL</span>
